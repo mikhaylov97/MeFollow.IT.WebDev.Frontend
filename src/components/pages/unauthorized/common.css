@@ -1,0 +1,257 @@
+/* All styles will be market with jsc-10*/
+
+.main-container-jsc-10 {
+    background-color: #131620 !important;
+}
+
+.unauthorized-main-wrapper-jsc-10 {
+    min-height: 100vh;
+}
+
+.without-margin-jsc-10 {
+    margin: 0 !important;
+}
+
+.relative-jsc-10 {
+    position: relative;
+}
+
+.align-center-jsc-10 {
+    text-align: center;
+}
+
+.form-wrapper-jsc-10 {
+    color: #5C6484;
+    width: 100%;
+    padding: 40px 48px;
+    max-width: 416px;
+    box-shadow: none;
+    border-radius: 12px;
+    background-color: #fff !important;
+}
+
+.simple-input-jsc-10 {
+    /*transition: border-color 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;*/
+    outline: none !important;
+    font-size: 1rem;
+    box-shadow: inset 0 0 0 1px #DFE1E7;
+    line-height: 1.25rem;
+    width: 100%;
+    border: 0;
+    height: 24px;
+    margin: 0;
+    display: block;
+    padding: 12px 24px;
+    min-width: 0;
+    box-sizing: content-box;
+    border-radius: 40px;
+    background: #F7F8FA none;
+    animation-name: mui-auto-fill-cancel;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.simple-input-jsc-10:focus {
+    box-shadow: inset 0 0 0 2px #3A87E0;
+}
+
+.simple-input-jsc-10::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: #a8adbd;
+    opacity: 1; /* Firefox */
+}
+
+.simple-input-jsc-10::-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: #DFE1E7;
+}
+
+.simple-input-jsc-10::-ms-input-placeholder { /* Microsoft Edge */
+    color: #DFE1E7;
+}
+
+.submit-btn-jsc-10 {
+    padding: 8px 32px !important;
+    border-radius: 40px !important;
+    color: #fff;
+    background-color: #3A87E0;
+    width: 100%;
+    height: 48px !important;
+    font-size: 1rem;
+    min-width: 64px;
+    box-sizing: border-box;
+    /*transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,border 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;*/
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: 0.02em;
+    text-transform: initial;
+    border: none;
+    outline: none !important;
+}
+
+.submit-btn-jsc-10:hover {
+    background-color: rgb(52, 121, 201);
+}
+
+.title-jsc-10 {
+    color: #1E2233;
+    padding: 0;
+    font-size: 1.7rem;
+    text-align: center;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.simple-link-jsc-10 {
+    text-decoration: none;
+    color: #3A87E0;
+}
+
+.strong-link-jsc-10 {
+    font-weight: 700;
+    text-decoration: none;
+    color: #3A87E0;
+}
+
+.simple-link-jsc-10:hover, .strong-link-jsc-10:hover {
+    color: #3A87E0;
+}
+
+.social-icon-jsc-10 {
+    outline: none !important;
+    flex: 0 0 auto;
+    color: rgba(0, 0, 0, 0.54);
+    overflow: visible;
+    font-size: 1.5rem;
+    text-align: center;
+    transition: background-color 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    background-color: transparent;
+    border: none;
+}
+
+.password-btn-jsc-10 {
+    display: flex;
+    color: #ABB0C4;
+    right: 0;
+    height: 100%;
+    position: absolute;
+    align-items: center;
+    padding-right: 8px;
+}
+
+.password-btn-jsc-10 button {
+    outline: none;
+    color: inherit;
+    background-color: transparent;
+    border: none;
+    font-size: 1.125rem;
+}
+
+.password-btn-jsc-10 svg {
+    fill: currentColor;
+    width: 1em;
+    height: 1em;
+    display: inline-block;
+    font-size: 1.5rem;
+    /*transition: fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;*/
+    flex-shrink: 0;
+    user-select: none;
+}
+
+
+/* REGISTRATION PAGE */
+.password-requirements-jsc-10 {
+    color: #363C54;
+    font-size: 0.94rem;
+    font-weight: 600;
+    line-height: 1.5;
+}
+
+.password-requirements-badge-jsc-10 {
+    fill: currentColor;
+    width: 1em;
+    height: 1em;
+    display: inline-block;
+    /*transition: fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;*/
+    flex-shrink: 0;
+    user-select: none;
+    color: #EEEFF1 !important;
+    stroke: #CCCFDB !important;
+    font-size: 1.25rem !important;
+}
+
+.password-requirements-text-jsc-10 {
+    margin-left: 6px;
+    font-size: 0.75rem;
+    font-weight: 400;
+    line-height: 1.5;
+}
+
+.password-btn-jsc-10 {
+    display: flex;
+    color: #ABB0C4;
+    right: 0;
+    height: 100%;
+    position: absolute;
+    align-items: center;
+    padding-right: 8px;
+}
+
+.password-btn-jsc-10 button {
+    outline: none;
+    color: inherit;
+    background-color: transparent;
+    border: none;
+    font-size: 1.125rem;
+}
+
+.password-btn-jsc-10 svg {
+    fill: currentColor;
+    width: 1em;
+    height: 1em;
+    display: inline-block;
+    font-size: 1.5rem;
+    /*transition: fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;*/
+    flex-shrink: 0;
+    user-select: none;
+}
+
+
+
+/* REGISTRATION-TYPE PAGE */
+.divider-jsc-10 p {
+    width: 90%;
+    margin: 10px auto;
+    line-height: 0.2em;
+    border-bottom: 1px solid #DFE1E7;
+}
+
+.divider-jsc-10 span {
+    color: #5C6484;
+    padding: 0 10px;
+    background-color: #fff;
+}
+
+.link-btn-jsc-10 {
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    height: 48px !important;
+    max-height: 48px;
+    color: #5C6484;
+    height: 40px;
+    box-shadow: none;
+    white-space: nowrap;
+    background-color: #EEEFF1;
+    padding: 12px 32px;
+    border-radius: 40px;
+    width: 100%;
+}
+
+.link-btn-jsc-10:hover {
+    color: #5C6484;
+    text-decoration: none;
+    background-color: rgb(214, 215, 216);
+}
+
+.comment-jsc-10 {
+    font-size: 0.94rem;
+    font-weight: inherit;
+    line-height: 1.4;
+}

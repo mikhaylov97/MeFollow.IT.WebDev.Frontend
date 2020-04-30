@@ -1,0 +1,8 @@
+/* All styles will be market with jsc-90*/
+
+#main-wrapper-grid-jsc-90 {
+    min-height: 100vh;
+    margin-left: 42px;
+    display: grid;
+    grid-template-columns: .95fr 1fr;
+}

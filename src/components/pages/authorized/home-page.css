@@ -1,0 +1,156 @@
+/* All styles will be market with jsc-30*/
+
+.main-wrapper-jsc-30 {
+    /*min-height: 100vh;*/
+    margin-left: 96px;
+}
+
+.main-wrapper-nav-jsc-30 {
+    border-bottom: 1px solid rgba(164,175,221,.2);
+    padding: 0 32px;
+}
+
+.main-wrapper-nav-jsc-30 ul {
+    display: flex;
+    flex-direction: row;
+    margin: 0;
+    padding: 0
+}
+
+.main-wrapper-nav-jsc-30 ul li {
+    cursor: pointer;
+    padding: 20px 0;
+    list-style: none;
+    text-decoration: none;
+    margin-right: 24px;
+    /*transition: border-bottom .2s;*/
+}
+
+.main-wrapper-nav-jsc-30 ul li:hover {
+    border-bottom: 4px solid #6f64e9;
+}
+
+.main-wrapper-nav-jsc-30 ul .active-jsc-30 {
+    border-bottom: 4px solid #6f64e9;
+}
+
+.main-wrapper-nav-jsc-30 ul li a {
+    text-decoration: none;
+    color: #3f5368;
+    background: none;
+    border: none;
+    padding: 20px 0;
+    font-size: 17px;
+}
+
+.main-wrapper-nav-jsc-30 .point-jsc-30 {
+    margin: 0 3px;
+}
+
+.main-wrapper-content-jsc-30 {
+    padding: 0 32px;
+    margin-top: 32px;
+}
+
+.main-wrapper-content-jsc-30 .course-jsc-30 a {
+    position: relative;
+    display: block;
+    padding: 16px;
+    border-radius: 8px;
+    color: #fff;
+}
+
+.courses-grid-jsc-30 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 16px 32px;
+    grid-auto-rows: 200px;
+    /*grid-gap: 32px;*/
+}
+
+.courses-grid-jsc-30 a {
+    text-decoration: none;
+}
+
+.courses-grid-item-jsc-30 {
+    position: relative;
+    display: flex;
+    flex-flow: column;
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+    transition: box-shadow .3s,opacity .5s;
+}
+
+.courses-grid-item-jsc-30:hover .type-1-jsc-30, .courses-grid-item-jsc-30:hover .type-2-jsc-30 {
+    opacity: 1;
+}
+
+
+.courses-grid-item-jsc-30 .type-1-jsc-30, .type-2-jsc-30 {
+    z-index: 0;
+    border-radius: 16px;
+    opacity: .8;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+}
+
+.courses-grid-item-jsc-30 .type-1-jsc-30 {
+    background-image: linear-gradient(320deg,#ffe814,#e51686);
+}
+
+.courses-grid-item-jsc-30 .type-2-jsc-30 {
+    background-image: linear-gradient(140deg,#0c54e0,#f64546),linear-gradient(300deg,#a786f2,#4937d1),linear-gradient(0deg,#1ae68e,#2364e0);
+}
+
+.courses-grid-item-jsc-30 .courses-grid-item-content-jsc-30 {
+    z-index: 10;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.courses-grid-item-jsc-30 .icon-jsc-30 {
+    position: relative;
+}
+
+.courses-grid-item-jsc-30 .icon-border-jsc-30 {
+    position: relative;
+    width: 48px;
+    height: 68px;
+    margin-left: 32px;
+    margin-top: 0px;
+}
+
+.courses-grid-item-jsc-30 .icon-body-jsc-30 {
+    position: absolute;
+    width: 32px;
+    height: 32px;
+    fill: #fff;
+    top: 12px;
+    left: 40px;
+}
+
+.courses-grid-item-jsc-30 .body-jsc-30 {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 0 32px 20px 32px;
+}
+
+.courses-grid-item-jsc-30 .body-jsc-30 h5 {
+    color: #fff;
+    font-size: 13px;
+    font-weight: 400;
+    opacity: 1;
+}
+
+.courses-grid-item-jsc-30 .body-jsc-30 h4 {
+    color: #fff;
+    font-size: 21px;
+    font-weight: 600;
+}

@@ -1,0 +1,60 @@
+/* All styles will be market with jsc-50*/
+
+.top-menu-jsc-50 {
+    margin-left: 96px;
+    height: 96px;
+    padding: 0 32px;
+    border-bottom: 1px solid rgba(164,175,221,.2);
+}
+
+.top-menu-wrapper-jsc-50 {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+}
+
+.top-menu-wrapper-jsc-50 h2 {
+    font-weight: 400;
+    font-size: 28px;
+    line-height: 32px;
+    color: #3f5368;
+}
+
+.top-menu-items-jsc-50 {
+    margin-right: 48px;
+}
+
+.top-menu-items-jsc-50 ul {
+    display: flex;
+    flex-direction: row;
+    margin: 0;
+}
+
+.top-menu-items-jsc-50 li {
+    list-style: none;
+    padding: 0 25px;
+}
+
+.top-menu-items-jsc-50 li a {
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 32px;
+    color: #3f5368;
+}
+
+.common-btn-jsc-50 {
+    font-size: 17px !important;
+    text-decoration: none !important;
+    padding: 10px 38px 14px 38px;
+    border-radius: 40px !important;
+    color: #fff !important;
+    background-color: #3A87E0;
+    font-weight: 500 !important;
+    /*transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,border 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;*/
+}
+
+.common-btn-jsc-50:hover {
+    background-color: rgb(52, 121, 201);
+}

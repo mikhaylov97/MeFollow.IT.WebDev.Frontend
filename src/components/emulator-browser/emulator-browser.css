@@ -1,0 +1,150 @@
+/* All styles will be market with jsc-80*/
+
+.emulator-area-jsc-80 {
+    position: relative;
+    left: 0%;
+    width: 100%;
+    display: flex;
+    z-index: 100;
+    flex-direction: column;
+    background-color: #fff;
+    box-shadow: -2px 2px 3px 0 rgba(0,0,0,.05);
+    transition: left .4s ease-out, width .4s ease-out;
+}
+
+.emulator-area-jsc-80 .emulator-area-controls-jsc-80 {
+    display: flex;
+    border-bottom: 1px solid #d1d2d6;
+}
+
+.emulator-area-jsc-80 .emulator-area-controls-jsc-80 div {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.emulator-area-jsc-80 .emulator-area-controls-jsc-80 button {
+    position: relative;
+    padding: 6px 12px 8px 12px;
+    background: transparent;
+    border: none;
+    outline: none;
+    transition: transform .1s ease-in-out,background-color .1s ease-in-out,background .1s ease-in-out;
+}
+
+.emulator-area-jsc-80 .emulator-area-controls-jsc-80 button svg {
+    width: 26px;
+    height: 26px;
+}
+
+.emulator-area-jsc-80 .emulator-area-controls-jsc-80 button .extra-big-jsc-70 {
+    width: 17px;
+    height: 17px;
+}
+
+.emulator-area-jsc-80 .emulator-area-controls-jsc-80 button:hover {
+    background-color: rgba(26,27,34,.07);
+}
+
+.emulator-area-jsc-80 .emulator-area-url-jsc-80 {
+    margin: 0 6px 0 6px;
+    height: 100%;
+}
+
+#emulator-url-jsc-80 {
+    width: 100%;
+    height: 70%;
+    font-size: 15px;
+    box-sizing: border-box;
+    background-color: rgb(230, 230, 230, .5);
+    border-radius: 20px;
+    border: none;
+    outline: none;
+    padding: 0 16px;
+}
+
+.emulator-area-jsc-80 .emulator-area-controls-jsc-80 button .tooltiptext-jsc-80 {
+    visibility: hidden;
+    opacity: 0;
+    width: 120px;
+    background-color: #262626;
+    color: #fff;
+    font-size: 14px;
+    text-align: center;
+    padding: 6px 0 10px 0;
+    border-radius: 6px;
+    transition: opacity .25s ease-in-out;
+
+    position: absolute;
+    top: 115%;
+    left: 50%;
+    margin-left: -60px; /* Use half of the width (120/2 = 60), to center the tooltip */
+    z-index: 1;
+}
+
+.emulator-area-jsc-80 .emulator-area-controls-jsc-80 button .tooltiptext-jsc-80::after {
+    content: " ";
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent black transparent;
+}
+
+.emulator-area-jsc-80 .emulator-area-controls-jsc-80 button:hover .tooltiptext-jsc-80 {
+    visibility: visible;
+    opacity: 1;
+}
+
+.emulator-area-jsc-80 .emulator-area-controls-jsc-80 button .tooltiptext-shifted-left-jsc-80 {
+    visibility: hidden;
+    opacity: 0;
+    width: 120px;
+    background-color: #262626;
+    color: #fff;
+    font-size: 14px;
+    text-align: center;
+    padding: 6px 0 10px 0;
+    border-radius: 6px;
+    transition: opacity .25s ease-in-out;
+
+    position: absolute;
+    top: 5%;
+    right: 105%;
+    z-index: 1;
+}
+
+.emulator-area-jsc-80 .emulator-area-controls-jsc-80 button .tooltiptext-shifted-left-jsc-80::after {
+    content: " ";
+    position: absolute;
+    top: 50%;
+    left: 100%;
+    margin-top: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent transparent black;
+}
+
+.emulator-area-jsc-80 .emulator-area-controls-jsc-80 button:hover .tooltiptext-shifted-left-jsc-80 {
+    visibility: visible;
+    opacity: 1;
+}
+
+
+
+
+
+
+/* EMULATOR AREA FRAME*/
+.emulator-area-frame-jsc-80 {
+    height: 100%;
+    display: flex;
+}
+
+.emulator-area-frame-jsc-80 iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}

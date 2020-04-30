@@ -1,0 +1,17 @@
+/* All styles will be market with jsc-20*/
+
+.header-jsc-20 {
+    top: 0;
+    left: auto;
+    right: 0;
+    position: fixed;
+    width: 100%;
+    z-index: 1100;
+    box-sizing: border-box;
+    flex-shrink: 0;
+    flex-direction: column;
+}
+
+.logo-jsc-20 {
+    padding: 40px 0 0 45px;
+}

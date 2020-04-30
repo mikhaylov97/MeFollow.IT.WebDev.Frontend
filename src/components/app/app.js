@@ -1,94 +1,49 @@
 import React, { Component } from 'react';
 
-import Header from '../header';
-import RandomPlanet from '../random-planet';
-import ErrorBoundry from '../error-boundry';
-import SwapiService from '../../services/swapi-service';
-import DummySwapiService from '../../services/dummy-swapi-service';
-
-import {
-  PeoplePage,
-  PlanetsPage,
-  StarshipsPage,
-  LoginPage,
-  SecretPage } from '../pages';
-
-import { SwapiServiceProvider } from '../swapi-service-context';
-
 import './app.css';
-
-import {BrowserRouter as Router, Switch, Route, Redirect} from 'react-router-dom';
-import StarshipDetails from '../sw-components/starship-details';
+import {BrowserRouter, Route, Redirect, Switch} from "react-router-dom";
+import LoginPage from "../pages/unauthorized/login-page";
+import RegistrationPage from "../pages/unauthorized/registration-page";
+import RegistrationTypePage from "../pages/unauthorized/registration-type-page";
+import RecoveryPage from "../pages/unauthorized/recovery-page";
+import HomePage from "../pages/authorized/home-page";
+import LessonPage from "../pages/authorized/lesson-page";
+import CoursePage from "../pages/authorized/course-page";
 
 export default class App extends Component {
 
-  state = {
-    swapiService: new SwapiService(),
-    isLoggedIn: false
-  };
-
-  onLogin = () => {
-    this.setState({
-      isLoggedIn: true
-    });
-  };
-
-  onServiceChange = () => {
-    this.setState(({ swapiService }) => {
-      const Service = swapiService instanceof SwapiService ?
-                        DummySwapiService : SwapiService;
-      return {
-        swapiService: new Service()
-      };
-    });
-  };
-
-  render() {
-
-    const { isLoggedIn } = this.state;
-
-    return (
-      <ErrorBoundry>
-        <SwapiServiceProvider value={this.state.swapiService} >
-          <Router>
-            <div className="stardb-app">
-              <Header onServiceChange={this.onServiceChange} />
-              <RandomPlanet />
-
-              <Switch>
-                <Route path="/"
-                       render={() => <h2>Welcome to StarDB</h2>}
-                       exact />
-                <Route path="/people/:id?" component={PeoplePage} />
-                <Route path="/planets" component={PlanetsPage} />
-                <Route path="/starships" exact component={StarshipsPage} />
-                <Route path="/starships/:id"
-                       render={({ match }) => {
-                         const { id } = match.params;
-                         return <StarshipDetails itemId={id} />
-                       }}/>
-
-                <Route
-                  path="/login"
-                  render={() => (
-                    <LoginPage
-                      isLoggedIn={isLoggedIn}
-                      onLogin={this.onLogin}/>
-                  )}/>
-
-                <Route
-                  path="/secret"
-                  render={() => (
-                    <SecretPage isLoggedIn={isLoggedIn} />
-                  )}/>
-
-                <Route render={() => <h2>Page not found</h2>} />
-              </Switch>
-
-            </div>
-          </Router>
-        </SwapiServiceProvider>
-      </ErrorBoundry>
-    );
-  }
-}
+    render() {
+        const accessToken = localStorage.getItem("token");
+        if (accessToken) {
+             return (
+                <BrowserRouter>
+                    <Switch>
+                        <Route exact path="/login" render={() => <LoginPage /> } />
+                        <Route exact path="/recovery" component={RecoveryPage} />
+                        <Route exact path="/registration-type" component={RegistrationTypePage} />
+                        <Route exact path="/registration" component={RegistrationPage} />
+                        <Route exact path="/home" component={HomePage} />
+                        <Route exact path="/course/:courseId" component={CoursePage} />
+                        <Route exact path="/course/:courseId/lesson/:lessonId" component={LessonPage} />
+                        <Route path="*" render={() => <Redirect to="/404" />} />
+                    </Switch>
+                </BrowserRouter>
+            );
+        } else {
+            return (
+                <BrowserRouter>
+                    <Switch>
+                        <Route exact path="/login" render={(props) => <LoginPage ${...props} /> } />
+                        <Route exact path="/recovery" component={RecoveryPage} />
+                        <Route exact path="/registration-type" component={RegistrationTypePage} />
+                        <Route exact path="/registration" component={RegistrationPage} />
+                        <Route exact path="*" render={(props) => {
+                            console.log(`App ${JSON.stringify(props)}`);
+                            return <Redirect to={{pathname: "/login", state: { from: props.location } }} />
+                        }} />
+                    </Switch>
+                </BrowserRouter>
+            );
+        }
+    }
+};
