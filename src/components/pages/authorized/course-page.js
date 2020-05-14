@@ -53,7 +53,7 @@ export default class CoursePage extends Component {
                                                                                          isLearningStarted={isLearningStarted} />;
         return (
             <React.Fragment>
-                <CommonHeader />
+                {/*<CommonHeader />*/}
                 {contentToBeDisplayed}
             </React.Fragment>
         );

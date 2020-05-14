@@ -51,6 +51,45 @@ const JsEditorToggleBlock = ({ activeEditor, onActiveEditorChanged }) => {
     );
 };
 
+const CheckNotification = ({ successful, notificationMessage, onCloseCheckNotificationBtnClicked }) => {
+    return (
+        <div className={`check-result-jsc-70 check-result-${successful ? "right" : "wrong"}-jsc-70`}>
+            <div>
+                <div className="mr-3">
+                    {successful
+                        ?
+                            <svg width="24" height="24" viewBox="0 0 24 24">
+                                <path fill="#02b241"
+                                      d="M12 24C18.6274 24 24 18.6274 24 12C24 5.37258 18.6274 0 12 0C5.37258 0 0 5.37258 0 12C0 18.6274 5.37258 24 12 24Z"/>
+                                <path fill="#fff"
+                                      d="M11.1956 14.6414L10.5259 15.3841L11.2272 16.0164L11.8987 15.3525L11.1956 14.6414ZM7.88453 13.0024L10.5259 15.3841L11.8652 13.8987L9.22384 11.517L7.88453 13.0024ZM11.8987 15.3525L16.7162 10.5891L15.31 9.1669L10.4925 13.9303L11.8987 15.3525Z"/>
+                            </svg>
+                        :
+                            <svg width="24" height="24" viewBox="0 0 24 24">
+                                <path fill="#ff3b30"
+                                      d="M12 24c6.6274 0 12-5.3726 12-12 0-6.62742-5.3726-12-12-12C5.37258 0 0 5.37258 0 12c0 6.6274 5.37258 12 12 12z"/>
+                                <path fill="#fff"
+                                      d="M12.5527 6.91156l1.93185165.51763809-2.58819045 9.65925826-1.93185165-.51763809z"/>
+                                <path fill="#fff"
+                                      d="M7.5 8.91156L5.37868 11.0329l-1.41421 1.4142 1.41421 1.4142L7.5 15.9826l1.41421-1.4142-2.12132-2.1213 2.12132-2.1213L7.5 8.91156zM16.5 8.91156l2.1213 2.12134 1.4142 1.4142-1.4142 1.4142L16.5 15.9826l-1.4142-1.4142 2.1213-2.1213-2.1213-2.1213L16.5 8.91156z"/>
+                            </svg>
+                    }
+                </div>
+                <div>
+                    {notificationMessage}
+                </div>
+                <button className="check-result-close-btn-jsc-70" onClick={(event) => onCloseCheckNotificationBtnClicked(event)}>
+                    <svg width="24" height="24" viewBox="0 0 24 24">
+                        <path
+                            d="M12.071 13.485l-2.828 2.829-1.415-1.415 2.829-2.828-2.829-2.828 1.415-1.415 2.828 2.829L14.9 7.828l.707.708.707.707-2.829 2.828 2.829 2.829-1.415 1.414-2.828-2.829z"
+                            fill="currentColor"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    );
+};
+
 const TaskDescriptionBlock = ({ lessonOrderIndex, lessonTitle, chapterOrderIndex, numberOfChapters, chapterDescription, isTaskDescriptionHidden, onTaskDescriptionClicked }) => {
      return (
         <React.Fragment>
@@ -80,6 +119,8 @@ export default class EmulatorWorkArea extends Component {
     restApiService = new RestApiService();
 
     state = {
+        courseId: null,
+        chapterId: null,
         bundleId: null,
         activeEditor: null,
         enabledHtml: null,
@@ -91,19 +132,25 @@ export default class EmulatorWorkArea extends Component {
         lessonOrderIndex: null,
         lessonTitle: null,
         chapterOrderIndex: null,
+        solved: null,
         numberOfChapters: null,
         chapterDescription: null,
         isTaskDescriptionHidden: false,
+        displayNotification: false,
+        notificationMessage: "",
+        notificationSuccessful: null,
         isLoading: true
     };
 
     constructor(props) {
         super(props);
-        const { enabledHtml, enabledCss, enabledJs,
+        const { courseId, chapterId, enabledHtml, enabledCss, enabledJs,
             htmlContent, cssContent, jsContent,
-            lessonOrderIndex, lessonTitle, chapterOrderIndex, numberOfChapters, chapterDescription, bundleId } = props;
+            lessonOrderIndex, lessonTitle, chapterOrderIndex, solved, numberOfChapters, chapterDescription, bundleId } = props;
         const activeEditor = enabledHtml ? "HTML" : (enabledCss ? "CSS" : (enabledJs ? "JS" : "HTML"));
         this.state = {
+            courseId: courseId,
+            chapterId: chapterId,
             bundleId: bundleId,
             activeEditor: activeEditor,
             enabledHtml: enabledHtml,
@@ -115,6 +162,7 @@ export default class EmulatorWorkArea extends Component {
             lessonOrderIndex: lessonOrderIndex,
             lessonTitle: lessonTitle,
             chapterOrderIndex: chapterOrderIndex,
+            solved: solved,
             numberOfChapters: numberOfChapters,
             chapterDescription: chapterDescription,
         };
@@ -122,11 +170,39 @@ export default class EmulatorWorkArea extends Component {
 
     componentDidUpdate(prevProps, prevState) {
         if (prevState.isTaskDescriptionHidden !== this.state.isTaskDescriptionHidden) {
+            const { enabledHtml, enabledCss, enabledJs } = this.state;
             setTimeout(function() {
-                ace.edit("html-editor-jsc-70").resize();
-                ace.edit("css-editor-jsc-70").resize();
-                ace.edit("js-editor-jsc-70").resize();
+                if (enabledHtml) ace.edit("html-editor-jsc-70").resize();
+                if (enabledCss) ace.edit("css-editor-jsc-70").resize();
+                if (enabledJs) ace.edit("js-editor-jsc-70").resize();
             }, 400);
+        }
+
+        if (prevProps !== this.props) {
+            console.log("not equal");
+            const { courseId, chapterId, enabledHtml, enabledCss, enabledJs,
+                htmlContent, cssContent, jsContent,
+                lessonOrderIndex, lessonTitle, chapterOrderIndex, solved, numberOfChapters, chapterDescription, bundleId } = this.props;
+            const activeEditor = enabledHtml ? "HTML" : (enabledCss ? "CSS" : (enabledJs ? "JS" : "HTML"));
+
+            this.setState({
+                courseId: courseId,
+                chapterId: chapterId,
+                bundleId: bundleId,
+                activeEditor: activeEditor,
+                enabledHtml: enabledHtml,
+                enabledCss: enabledCss,
+                enabledJs: enabledJs,
+                htmlContent: htmlContent,
+                cssContent: cssContent,
+                jsContent: jsContent,
+                lessonOrderIndex: lessonOrderIndex,
+                lessonTitle: lessonTitle,
+                chapterOrderIndex: chapterOrderIndex,
+                solved: solved,
+                numberOfChapters: numberOfChapters,
+                chapterDescription: chapterDescription,
+            });
         }
     }
 
@@ -143,20 +219,33 @@ export default class EmulatorWorkArea extends Component {
         });
     };
 
-    onCheckTaskClicked = () => {
-        const htmlContent = ace.edit("html-editor-jsc-70").getValue();
-        this.restApiService.uploadSandboxResource(htmlContent, "HTML")
-            .then((id) => {
-               console.log("HTML successfully uploaded");
+    onCheckTaskClicked = (chapterId, onSolvedStateUpdated) => {
+        this.restApiService.checkChapterAnswer(chapterId)
+            .then(({ successful, resultMessage }) => {
+                onSolvedStateUpdated(successful);
+                this.setState({
+                    displayNotification: true,
+                    notificationSuccessful: successful,
+                    notificationMessage: resultMessage
+                });
             });
+    };
+
+    onCloseCheckNotificationBtnClicked = (event) => {
+        event.preventDefault();
+
+        this.setState({
+            displayNotification: false
+        });
     };
 
     render() {
 
-        const { bundleId, activeEditor, enabledHtml, enabledCss, enabledJs, htmlContent, cssContent, jsContent,
-            lessonOrderIndex, lessonTitle, chapterOrderIndex, numberOfChapters, chapterDescription, isTaskDescriptionHidden } = this.state;
+        console.log("render work area");
+        const { courseId, chapterId, bundleId, activeEditor, enabledHtml, enabledCss, enabledJs, htmlContent, cssContent, jsContent,
+            lessonOrderIndex, lessonTitle, chapterOrderIndex, numberOfChapters, solved, chapterDescription, isTaskDescriptionHidden, displayNotification, notificationSuccessful, notificationMessage } = this.state;
 
-        const { displayMask, onMaskDisplayedStateChange, onResetChapterProgressButtonClicked } = this.props;
+        const { displayMask, moveToNextChapter, onMaskDisplayedStateChange, onSolvedStateUpdated, onResetChapterProgressButtonClicked } = this.props;
         const maskBlock = displayMask
             ? <div id="full-screen-mask-jsc-70" style={{visibility: "visible", opacity: 1}} onClick={() => onMaskDisplayedStateChange()} />
             : <div id="full-screen-mask-jsc-70" style={{visibility: "hidden"}} />;
@@ -168,6 +257,16 @@ export default class EmulatorWorkArea extends Component {
         const htmlEditor = enabledHtml ? <HtmlEditor bundleId={bundleId} content={htmlContent} className={`${activeEditor === "HTML" ? 'active-jsc-70' : ''}`} visible={activeEditor === "HTML"} /> : null;
         const cssEditor = enabledCss ? <CssEditor bundleId={bundleId} content={cssContent} className={`${activeEditor === "CSS" ? 'active-jsc-70' : ''}`} visible={activeEditor === "CSS"} /> : null;
         const jsEditor = enabledJs ? <JsEditor bundleId={bundleId} content={jsContent} className={`${activeEditor === "JS" ? 'active-jsc-70' : ''}`} visible={activeEditor === "JS"} /> : null;
+
+        const button = solved
+            ?
+                <button className="submit-btn-jsc-70 green-color-jsc-70" onClick={() => moveToNextChapter(courseId)}>
+                    Далее
+                </button>
+            :
+                <button className="submit-btn-jsc-70" onClick={() => this.onCheckTaskClicked(chapterId, onSolvedStateUpdated)}>
+                    Проверить
+                </button>;
 
         return (
             <div id="work-area-jsc-70" className="work-area-jsc-70">
@@ -183,6 +282,9 @@ export default class EmulatorWorkArea extends Component {
                     {jsEditor}
                 </div>
                 <div className="work-area-task-jsc-70">
+                    { displayNotification ? <CheckNotification successful={notificationSuccessful}
+                                                               notificationMessage={notificationMessage}
+                                                               onCloseCheckNotificationBtnClicked={this.onCloseCheckNotificationBtnClicked} /> : null}
                     <div className="task-description-jsc-70">
                         <TaskDescriptionBlock lessonOrderIndex={lessonOrderIndex}
                                               lessonTitle={lessonTitle}
@@ -199,17 +301,18 @@ export default class EmulatorWorkArea extends Component {
                             </button>
                         </div>
                         <div>
-                            <button className="again-btn-jsc-70" onClick={onResetChapterProgressButtonClicked}>
-                                <svg className="icon-jsc-70 icon-refresh-jsc-70" width="24" height="24" viewBox="0 0 24 24">
-                                    <path d="M17.5 12A5.5 5.5 0 1112 6.5V5a7 7 0 107 7h-1.5z" fill="currentColor" />
-                                    <path fillRule="evenodd" clipRule="evenodd" d="M18 7.667L14 13h8l-4-5.333z"
-                                          fill="currentColor" />
-                                </svg>
-                                <span className="tooltiptext-jsc-70">Начать заново</span>
-                            </button>
-                            <button className="submit-btn-jsc-70" onClick={this.onCheckTaskClicked}>
-                                Проверить
-                            </button>
+                            {!solved ?
+                                <button className="again-btn-jsc-70" onClick={onResetChapterProgressButtonClicked}>
+                                    <svg className="icon-jsc-70 icon-refresh-jsc-70" width="24" height="24"
+                                         viewBox="0 0 24 24">
+                                        <path d="M17.5 12A5.5 5.5 0 1112 6.5V5a7 7 0 107 7h-1.5z" fill="currentColor"/>
+                                        <path fillRule="evenodd" clipRule="evenodd" d="M18 7.667L14 13h8l-4-5.333z"
+                                              fill="currentColor"/>
+                                    </svg>
+                                    <span className="tooltiptext-jsc-70">Начать заново</span>
+                                </button>
+                            : null}
+                            {button}
                         </div>
                     </div>
                 </div>

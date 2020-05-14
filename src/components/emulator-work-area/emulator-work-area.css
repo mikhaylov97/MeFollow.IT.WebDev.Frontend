@@ -157,6 +157,7 @@
 .work-area-task-jsc-70 .submit-controls-jsc-70 .submit-btn-jsc-70 {
     padding: 10px 24px 12px 24px;
     background: #1a1b22;
+    width: 140px;
     color: #fff;
     border: none;
     outline: none;
@@ -165,6 +166,14 @@
 
 .work-area-task-jsc-70 .submit-controls-jsc-70 .submit-btn-jsc-70:hover {
     background-color: #3A87E0;
+}
+
+.work-area-task-jsc-70 .submit-controls-jsc-70 .green-color-jsc-70 {
+    background: #11c150;
+}
+
+.work-area-task-jsc-70 .submit-controls-jsc-70 .green-color-jsc-70:hover {
+    background: #02b241;
 }
 
 #html-editor-jsc-70, #css-editor-jsc-70, #js-editor-jsc-70 {
@@ -284,5 +293,44 @@
     background-color: white;
     height: 40vh;
     transition: height 0.4s ease-out;
+}
+
+.work-area-task-jsc-70 .check-result-jsc-70 {
+    background-color: #f7f9fc;
+    display: flex;
+}
+
+.work-area-task-jsc-70 .check-result-jsc-70 > div {
+    position: relative;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    margin: 10px;
+    padding: 16px 42px 16px 16px;
+    background-color: #fff;
+}
+
+.work-area-task-jsc-70 .check-result-right-jsc-70 > div {
+    border: 1px solid #4acf5e;
+}
+
+.work-area-task-jsc-70 .check-result-wrong-jsc-70 > div {
+    border: 1px solid #ff3b30;
+}
+
+.work-area-task-jsc-70 .check-result-jsc-70 .check-result-close-btn-jsc-70 {
+    position: absolute;
+    right: 12px;
+    top: 12px;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    padding: 3px 5px 4px 5px;
+    border-radius: 6px;
+    transition: transform .1s ease-in-out,background-color .1s ease-in-out,background .1s ease-in-out;
+}
+
+.work-area-task-jsc-70 .check-result-jsc-70 .check-result-close-btn-jsc-70:hover {
+    background-color: rgba(26,27,34,.07);;
 }
 

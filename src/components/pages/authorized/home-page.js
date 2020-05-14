@@ -8,8 +8,8 @@ import RestApiService from "../../../services/rest-api-service";
 const HomePage = () => {
     return (
         <React.Fragment>
-            <CommonLeftMenu />
-            <CommonHeader />
+            <CommonLeftMenu mode="ADMIN" />
+            <CommonHeader title="Главная" displayLinks={true}/>
             <HomePageBody />
         </React.Fragment>
     );
