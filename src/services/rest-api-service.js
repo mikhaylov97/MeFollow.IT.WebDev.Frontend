@@ -94,7 +94,7 @@ export default class RestApiService {
         return this.processAuthorizedRequest(`/sandbox/bundle/${bundleId}`, requestPayload, token, false);
     }
 
-    getLesson(courseId, lessonId) {
+    getLesson(courseId, lessonId, direct, chapterId) {
         const token = localStorage.getItem("token");
         const requestPayload = {
             method: 'GET',
@@ -102,7 +102,8 @@ export default class RestApiService {
                 'Content-Type': 'application/json'
             }
         };
-        return this.processAuthorizedRequest(`/courses/${courseId}/lessons/${lessonId}`, requestPayload, token, true);
+
+        return this.processAuthorizedRequest(`/courses/${courseId}/lessons/${lessonId}${direct ? "?direct=" + direct : ""}${chapterId ? "&chapterId=" + chapterId : ""}`, requestPayload, token, true);
     }
 
     getCourse(courseId) {
@@ -274,7 +275,7 @@ export default class RestApiService {
         return this.processAuthorizedRequest(`/management/chapters/${chapterId}/rules/${ruleId}`, requestPayload, token, true);
     }
 
-    moveToNextChapter(courseId) {
+    moveToNextChapter(courseId, chapterId) {
         const token = localStorage.getItem("token");
         const requestPayload = {
             method: 'POST',
@@ -282,7 +283,18 @@ export default class RestApiService {
                 'Content-Type': 'application/json'
             }
         };
-        return this.processAuthorizedRequest(`/courses/${courseId}/progress/next`, requestPayload, token, false);
+        return this.processAuthorizedRequest(`/courses/${courseId}/chapters/${chapterId}/next`, requestPayload, token, true);
+    }
+
+    getAllLessonsByTopicId(topicId) {
+        const token = localStorage.getItem("token");
+        const requestPayload = {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        };
+        return this.processAuthorizedRequest(`/topics/${topicId}/lessons`, requestPayload, token, true);
     }
 }
 

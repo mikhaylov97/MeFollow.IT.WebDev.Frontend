@@ -1460,7 +1460,7 @@ class ManagementRulesBlock extends Component {
             {ruleTypeDependantFields}
             <div className="d-flex justify-content-end mb-2">
                 <button className="submit-btn-jsc-100" type="submit">
-                    <span>Создать главу</span>
+                    <span>Создать правило</span>
                 </button>
             </div>
         </React.Fragment>;

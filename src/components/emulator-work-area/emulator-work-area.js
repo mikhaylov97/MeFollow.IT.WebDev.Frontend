@@ -146,7 +146,7 @@ export default class EmulatorWorkArea extends Component {
         super(props);
         const { courseId, chapterId, enabledHtml, enabledCss, enabledJs,
             htmlContent, cssContent, jsContent,
-            lessonOrderIndex, lessonTitle, chapterOrderIndex, solved, numberOfChapters, chapterDescription, bundleId } = props;
+            lessonOrderIndex, lessonTitle, chapterOrderIndex, solved, resultMessage, numberOfChapters, chapterDescription, bundleId } = props;
         const activeEditor = enabledHtml ? "HTML" : (enabledCss ? "CSS" : (enabledJs ? "JS" : "HTML"));
         this.state = {
             courseId: courseId,
@@ -163,6 +163,9 @@ export default class EmulatorWorkArea extends Component {
             lessonTitle: lessonTitle,
             chapterOrderIndex: chapterOrderIndex,
             solved: solved,
+            displayNotification: !!resultMessage,
+            notificationMessage: resultMessage ? resultMessage : null,
+            notificationSuccessful: !!resultMessage,
             numberOfChapters: numberOfChapters,
             chapterDescription: chapterDescription,
         };
@@ -179,10 +182,9 @@ export default class EmulatorWorkArea extends Component {
         }
 
         if (prevProps !== this.props) {
-            console.log("not equal");
             const { courseId, chapterId, enabledHtml, enabledCss, enabledJs,
                 htmlContent, cssContent, jsContent,
-                lessonOrderIndex, lessonTitle, chapterOrderIndex, solved, numberOfChapters, chapterDescription, bundleId } = this.props;
+                lessonOrderIndex, lessonTitle, chapterOrderIndex, solved, resultMessage, numberOfChapters, chapterDescription, bundleId } = this.props;
             const activeEditor = enabledHtml ? "HTML" : (enabledCss ? "CSS" : (enabledJs ? "JS" : "HTML"));
 
             this.setState({
@@ -200,6 +202,9 @@ export default class EmulatorWorkArea extends Component {
                 lessonTitle: lessonTitle,
                 chapterOrderIndex: chapterOrderIndex,
                 solved: solved,
+                displayNotification: !!resultMessage,
+                notificationMessage: resultMessage ? resultMessage : null,
+                notificationSuccessful: !!resultMessage,
                 numberOfChapters: numberOfChapters,
                 chapterDescription: chapterDescription,
             });
@@ -235,7 +240,8 @@ export default class EmulatorWorkArea extends Component {
         event.preventDefault();
 
         this.setState({
-            displayNotification: false
+            displayNotification: false,
+            notificationMessage: ""
         });
     };
 
@@ -243,7 +249,7 @@ export default class EmulatorWorkArea extends Component {
 
         console.log("render work area");
         const { courseId, chapterId, bundleId, activeEditor, enabledHtml, enabledCss, enabledJs, htmlContent, cssContent, jsContent,
-            lessonOrderIndex, lessonTitle, chapterOrderIndex, numberOfChapters, solved, chapterDescription, isTaskDescriptionHidden, displayNotification, notificationSuccessful, notificationMessage } = this.state;
+            lessonOrderIndex, lessonTitle, chapterOrderIndex, numberOfChapters, solved, resultMessage, chapterDescription, isTaskDescriptionHidden, displayNotification, notificationSuccessful, notificationMessage } = this.state;
 
         const { displayMask, moveToNextChapter, onMaskDisplayedStateChange, onSolvedStateUpdated, onResetChapterProgressButtonClicked } = this.props;
         const maskBlock = displayMask
@@ -260,7 +266,7 @@ export default class EmulatorWorkArea extends Component {
 
         const button = solved
             ?
-                <button className="submit-btn-jsc-70 green-color-jsc-70" onClick={() => moveToNextChapter(courseId)}>
+                <button className="submit-btn-jsc-70 green-color-jsc-70" onClick={() => moveToNextChapter(courseId, chapterId)}>
                     Далее
                 </button>
             :
@@ -283,7 +289,7 @@ export default class EmulatorWorkArea extends Component {
                 </div>
                 <div className="work-area-task-jsc-70">
                     { displayNotification ? <CheckNotification successful={notificationSuccessful}
-                                                               notificationMessage={notificationMessage}
+                                                               notificationMessage={notificationMessage || resultMessage}
                                                                onCloseCheckNotificationBtnClicked={this.onCloseCheckNotificationBtnClicked} /> : null}
                     <div className="task-description-jsc-70">
                         <TaskDescriptionBlock lessonOrderIndex={lessonOrderIndex}
